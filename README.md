@@ -16,3 +16,6 @@ Si usas Visual Studio Code, te recomiendo usar la extensión Live Server. Solo t
 
 (Si intentas abrir el archivo index.html directamente con doble clic en tu navegador, este bloqueará la carga de las canciones por políticas de seguridad y la pantalla se quedará vacía).
 
+
+
+LINK DEL REPOSITORIO GITHUB: https://github.com/EmaMartinMonlau/reproductor-blend 

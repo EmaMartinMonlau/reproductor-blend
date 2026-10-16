@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blend - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    <script src="scripts.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Contenedor principal de toda la aplicación -->
+    <div class="app-container">
+
+        <!-- 1. CABECERA -->
+        <header class="app-header">
+            <div class="logo"><img src="src/imagenes/logo.png" alt="Logo"></div>
+            <div>
+                <h1 id="app-title">Blend</h1>
+                <p id="subtitle">Transforma tu experiencia musical</p>
+            </div>
+        </header>
+
+        <!-- 2. ZONA CENTRAL (Lista de canciones y Detalles) -->
+        <main class="app-main">
+
+            <!-- Columna Izquierda: Lista de Reproducción -->
+            <section class="playlist-section">
+                <header class="playlist-header">
+                    <h2>Lista de reproducción</h2>
+                    <span id="song-count">0 canciones</span>
+                </header>
+
+                <!-- Aquí inyectaremos los <li> con JavaScript más adelante -->
+                <ul id="playlist" class="playlist">
+                    <!-- Ejemplo de cómo será un ítem de la lista (lo dejamos comentado o estático por ahora para maquetar) -->
+                    <li class="playlist-item">
+                        <img src="src/imagenes/logo.png" alt="Carátula" class="song-thumb">
+                        <div class="song-info">
+                            <h3>Nombre de la Canción</h3>
+                            <p>Artista</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Columna Derecha: Sonando ahora y Ecualizador -->
+            <aside class="details-section">
+
+                <!-- Tarjeta de la canción actual -->
+                <div class="now-playing-card">
+                    <img src="" alt="Carátula actual" id="current-img">
+                    <div class="current-info">
+                        <span class="badge">SONANDO AHORA</span>
+                        <h2 id="current-title"></h2>
+                        <p id="current-artist"></p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta del Ecualizador -->
+                <div class="equalizer-card">
+                    <header>
+                        <h2>Ecualizador</h2>
+                    </header>
+
+                    <!-- Animación visual del ecualizador (lo haremos con CSS/JS luego) -->
+                    <div id="visualizer" class="visualizer">
+                        <!-- Las barras las crearemos con JavaScript -->
+                    </div>
+
+                    <!-- Controles de Audio (Graves, Medios, Agudos) -->
+                    <div class="audio-controls">
+                        <div class="control-group">
+                            <label>Graves</label>
+                            <input type="range" id="eq-bass" min="-10" max="10" value="0">
+                        </div>
+                        <div class="control-group">
+                            <label>Medios</label>
+                            <input type="range" id="eq-mid" min="-10" max="10" value="0">
+                        </div>
+                        <div class="control-group">
+                            <label>Agudos</label>
+                            <input type="range" id="eq-treble" min="-10" max="10" value="0">
+                        </div>
+                    </div>
+                    <button id="reset-eq">Restablecer ecualizador</button>
+                </div>
+            </aside>
+        </main>
+
+        <!-- 3. BARRA DE REPRODUCCIÓN INFERIOR -->
+        <footer class="player-bar">
+
+            <!-- Info de la canción en la barra inferior -->
+            <div class="player-info">
+                <img src="src/imagenes/logo.png" alt="" id="player-thumb">
+                <div>
+                    <h4 id="player-title">Título</h4>
+                    <p id="player-artist">Artista</p>
+                </div>
+            </div>
+
+            <!-- Controles centrales (Atrás, Play/Pause, Siguiente) y Progreso -->
+            <div class="player-controls">
+                <div class="buttons">
+                    <button id="btn-prev">⏮</button>
+                    <button id="btn-play-pause">▶</button>
+                    <button id="btn-next">⏭</button>
+                </div>
+                <div class="progress-container">
+                    <span id="time-current">0:00</span>
+                    <input type="range" id="progress-bar" min="0" max="100" value="0">
+                    <span id="time-total">0:00</span>
+                </div>
+            </div>
+
+            <!-- Control de Volumen (Derecha) -->
+            <div class="player-volume">
+                <span><img src="src/imagenes/volumen.png" id="volume-icon" alt="Volumen"></span>
+                <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.8">
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+</html>

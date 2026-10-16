@@ -1,0 +1,536 @@
+
+   /*1. VARIABLES DE COLOR (Paleta del Mockup)
+   ========================================= */
+:root {
+  --background: #000000; /* Fondo principal super oscuro */
+  --tarjetas: #1f150c; /* Fondo un poco más claro para tarjetas */
+  --text-main: #ffffff; /* Texto principal blanco */
+  --text-muted: #e1dcc9; /* Texto secundario grisáceo */
+  --border-color: hsl(50, 20%, 34%);
+  /* Color sutil para las líneas de separación */
+}
+
+#app-title {
+  font-family: "BBH Bartle", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2.5rem;
+  color: var(--border-color);
+}
+
+#volume-icon {
+    width: 24px; 
+    height: auto; 
+    vertical-align: middle; 
+}
+
+#subtitle {
+  color: var(--text-muted);
+  font-family: "Limelight", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.9rem;
+}
+/*    2. RESET BÁSICO
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  /* Esto hace que si le damos padding a una caja, no se haga más grande de lo que le hemos dicho */
+  box-sizing: border-box;
+}
+
+/*    3. ESTILOS GENERALES Y LAYOUT BASE
+   ========================================= */
+body {
+  /* Una fuente limpia y moderna por defecto (sans-serif) */
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  background-color: var(--background);
+  color: var(--text-main);
+
+  /* Hacemos que la web ocupe exactamente el 100% del alto de la ventana del navegador */
+  height: 100vh;
+  overflow: hidden; 
+
+/* El contenedor principal usa Flexbox en modo columna */
+.app-container {
+  display: flex;
+  flex-direction: column; 
+  height: 100%;
+}
+
+/*   4. LA CABECERA (HEADER)
+   ========================================= */
+.app-header {
+  display: flex; 
+  align-items: center; 
+  padding: 20px 30px;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border-color); 
+}
+
+.app-header .logo {
+  margin-right: 15px;
+  background-color: var(--text-main);
+  padding: 3px; 
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 60px; 
+  height: 60px; 
+  object-fit: cover;
+  border-radius: 4px; 
+}
+
+.app-header h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.app-header p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/*    5. ZONA CENTRAL (Main y Columnas)
+   ========================================= */
+.app-main {
+
+  display: flex;
+  flex: 1;
+  padding: 20px 30px;
+  gap: 20px; 
+  overflow: hidden;
+}
+
+/* --- Columna Izquierda: Lista de Reproducción --- */
+.playlist-section {
+  flex: 1; 
+  background-color: var(--tarjetas);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Cabecera interna de la lista */
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.playlist-header h2 {
+  font-size: 1.1rem;
+}
+
+.playlist-header span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* --- Columna Derecha: Detalles (Sonando y Ecualizador) --- */
+.details-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Tarjeta 1: Sonando ahora (70% del alto) */
+.now-playing-card {
+  flex: 5; /* Ocupa el 70% del alto disponible */
+  background-color: var(--tarjetas);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+
+  /* Preparamos para centrar el contenido de la carátula más adelante */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tarjeta 2: Ecualizador (30% del alto) */
+.equalizer-card {
+  flex: 5; 
+  background-color: var(--tarjetas);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/*   6. LISTA DE REPRODUCCIÓN (PLAYLIST)
+   ========================================= */
+.playlist {
+  list-style: none; 
+  overflow-y: auto; 
+  flex: 1; 
+  padding: 10px;
+}
+
+/* Estilo para cada fila de canción */
+.playlist-item {
+  display: flex;
+  align-items: center; 
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease; 
+  border-radius: 8px; 
+}
+
+/* Efecto al pasar el ratón por encima (hover) */
+.playlist-item:hover {
+  background-color: var(--background);
+}
+
+/* Imagen en miniatura de la canción */
+.song-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover; 
+  background-color: var(--border-color); 
+  margin-right: 15px;
+}
+
+/* Contenedor del título y el artista */
+.song-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.song-info p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/*   7. BARRA DE REPRODUCCIÓN (FOOTER)
+   ========================================= */
+.player-bar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--background); 
+  border-top: 1px solid var(--border-color); 
+  height: 90px; 
+}
+
+/* Bloque Izquierdo: Info de la canción */
+.player-info {
+  display: flex;
+  align-items: center;
+  width: 25%; 
+}
+
+#player-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: var(--border-color);
+  margin-right: 15px;
+}
+
+#player-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#player-artist {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Bloque Central: Controles y Progreso */
+.player-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 8px;
+}
+
+/* Estilo para los botones nativos del HTML */
+.buttons button {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.buttons button:hover {
+  color: var(
+    --border-color); 
+  transform: scale(1.1); 
+}
+
+#btn-play-pause {
+  font-size: 2.2rem; 
+}
+
+/* Barra de progreso de la canción */
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px; 
+  width: 100%;
+  max-width: 600px; 
+}
+
+/* Clave para que la barra se estire */
+#progress-bar {
+  flex: 1;
+}
+
+.progress-container span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* Bloque Derecho: Volumen */
+.player-volume {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+  gap: 10px;
+  width: 25%; 
+}
+
+/* Estilo para los inputs de tipo "range" (las barras desplazables) */
+input[type="range"] {
+  cursor: pointer;
+  accent-color: var(--border-color ); 
+}
+
+.player-volume input {
+  width: 100px; }
+
+/* 8. TARJETAS DERECHAS (Sonando Ahora y Ecualizador)
+   ========================================= */
+
+/* Tarjeta: Sonando Ahora */
+#current-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 15px; 
+  object-fit: cover;
+  background-color: var(--border-color);
+  margin-bottom: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.current-info {
+  text-align: center; 
+}
+
+/* La etiqueta de SONANDO AHORA */
+.badge {
+  display: inline-block;
+  background-color: var(--border-color);
+  color: var(--background); 
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px; 
+  margin-bottom: 15px;
+  letter-spacing: 1px; 
+}
+
+#current-title {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+#current-artist {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+/* --- 8.2. Tarjeta: Ecualizador --- */
+.equalizer-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.equalizer-card header span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Contenedor de los 3 controles (Graves, Medios, Agudos) */
+.audio-controls {
+  display: flex;
+  justify-content: space-around; /* Reparte el espacio por igual entre los 3 */
+  align-items: center;
+  flex: 1; /* Obliga a este contenedor a rellenar el espacio vacío */
+}
+
+/* Cada control individual */
+.control-group {
+  display: flex;
+  flex-direction: column; /* Apila la palabra (ej: Graves) sobre la barrita */
+  align-items: center;
+  gap: 15px;
+}
+
+.control-group label {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* Botón de restablecer */
+#reset-eq {
+  background-color: var(--border-color);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+#reset-eq:hover {
+  background-color: var(
+    --background
+  ); /* Al pasar el ratón se ilumina un poco el fondo */
+}
+
+/* =========================================
+   9. PERSONALIZACIÓN DEL SCROLLBAR
+   ========================================= */
+
+/* Anchura de la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* El "carril" o fondo por donde se desliza la barra */
+::-webkit-scrollbar-track {
+  background: var(--tarjetas);
+  border-radius: 8px;
+}
+
+/* El "pulgar" (la barrita que agarras y mueves) */
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 8px;
+  /* Un pequeño borde para que no pegue a los lados del carril */
+  border: 2px solid var(--tarjetas);
+}
+
+/* Color de la barra cuando le pasas el ratón por encima */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-color);
+}
+
+/* =========================================
+   10. VISUALIZADOR DE AUDIO
+   ========================================= */
+.visualizer {
+  display: flex;
+  align-items: flex-end; /* Alinea las barras hacia abajo para que crezcan hacia arriba */
+  justify-content: center;
+  gap: 4px; /* Separación entre barras */
+  height: 100px; /* Altura máxima que alcanzarán las barras */
+  margin-bottom: 20px;
+  background-color: var(--background);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra interior para darle profundidad */
+}
+
+.bar {
+  flex: 1; /* Hace que todas las barras se repartan el ancho disponible */
+  max-width: 12px;
+  height: 5px; /* Altura inicial mínima cuando no suena nada */
+  background-color: var(--border-color);
+  border-radius: 3px 3px 0 0; /* Redondea solo las puntas de arriba */
+  transition: height 0.05s ease; /* Suaviza ligeramente los saltos bruscos de la música */
+}
+
+/* Clase que añadiremos con JS para una caída suave */
+.bar.smooth-drop {
+  transition: height 0.6s ease-out;
+}
+
+   /*11. ESTADO ACTIVO EN LA PLAYLIST*/
+.playlist-item.active {
+  background-color: var(--border-color);
+  border-left: 4px solid var(--border-color);
+  padding-left: 11px;
+}
+
+/* =========================================
+   12. RESPONSIVIDAD (Adaptación a portátiles)
+   ========================================= */
+
+/* Esta regla se aplica solo si la altura de la ventana es menor a 850px (como en portátiles de 13/14") */
+@media (max-height: 850px) {
+    /* 1. Reducimos el tamaño de la carátula gigante */
+    #current-img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 10px;
+    }
+
+    /* 2. Hacemos los títulos un poco más pequeños */
+    #current-title {
+        font-size: 1.4rem;
+    }
+
+    /* 3. Reducimos la altura máxima de las barras del visualizador */
+    .visualizer {
+        height: 60px;
+        margin-bottom: 15px;
+    }
+
+    /* 4. Quitamos un poco de "aire" (padding) a las tarjetas y la cabecera para ganar espacio vital */
+    .now-playing-card, .equalizer-card {
+        padding: 15px;
+    }
+    
+    .app-header {
+        padding: 10px 30px;
+    }
+  }
+}
